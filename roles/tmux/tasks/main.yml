@@ -1,0 +1,25 @@
+---
+- name: clone tmux repository
+  git:
+    repo: https://github.com/tmux/tmux.git
+    dest: /usr/bin/local/tmux
+  tags:
+    - tmux
+    - tmux-install
+- name: make tmux
+  shell: |
+    cd /usr/bin/local/tmux
+    sh autogen.sh
+    ./configure && make
+  tags:
+    - tmux
+    - tmux-install
+- name: create symlinks for tmux
+  file:
+    src: ~/.dotfiles/tmux.conf
+    dest: ~/.tmux.conf
+    state: link
+  tags:
+    - tmux
+    - tmux-install
+    - tmux-symlink

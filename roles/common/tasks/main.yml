@@ -1,0 +1,24 @@
+---
+- name: ensure ~/.config folder exists
+  file:
+    path: ~/.config
+    state: directory
+    mode: '0755'
+  tags:
+    - ensure-config-folder
+
+- name: ensure ~/.workspace folder exists
+  file:
+    path: ~/workspace
+    state: directory
+    mode: '0755'
+  tags:
+    - ensure-workspace-folder
+
+- name: ensure ~/workspace/wttj folder exists
+  file:
+    path: ~/workspace/wttj
+    state: directory
+    mode: '0755'
+  tags:
+    - ensure-wttj-folder

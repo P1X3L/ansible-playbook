@@ -1,0 +1,5 @@
+---
+- name: ensure dotfiles are installed
+  git:
+    repo: git@github.com:P1X3L/dotfiles.git
+    dest: ~/.dotfiles

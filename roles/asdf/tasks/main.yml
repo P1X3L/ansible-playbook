@@ -1,0 +1,33 @@
+---
+- name: install asdf dependencies
+  apt:
+    name: ['automake', 'autoconf', 'libreadline-dev', 'libncurses-dev', 'libssl-dev', 'libyaml-dev', 'libxslt-dev', 'libffi-dev', 'libtool', 'unixodbc-dev', 'unzip', 'curl']
+    update_cache: yes
+  become: yes
+  tags:
+    - asdf
+- name: install asdf
+  git:
+    repo: https://github.com/asdf-vm/asdf.git
+    dest: ~/.asdf
+    version: v0.7.2
+  tags:
+    - asdf
+
+- name: ensure ~/.config/fish/completions folder exists
+  file:
+    path: ~/.config/fish/completions
+    state: directory
+    mode: '0755'
+  tags:
+    - asdf
+    - asdf-ensure-fish-completions
+
+- name: add asdf to the shell (fish)
+  file:
+    src: ~/.asdf/completions/asdf.fish
+    dest: ~/.config/fish/completions/asdf.fish
+    state: link
+  tags:
+    - asdf
+    - asdf-fish-completions

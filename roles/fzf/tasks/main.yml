@@ -1,0 +1,8 @@
+- name: create symlinks for fzf
+  file:
+    src: ~/.fzf/shell/key-bindings.fish
+    dest: ~/.config/fish/functions/fzf_key_bindings.fish
+    state: link
+  tags:
+    - fzf
+

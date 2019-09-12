@@ -1,0 +1,23 @@
+---
+- hosts: all
+  become: yes
+  become_user: root
+  gather_facts: no
+  tasks:
+    - name: ensure ansible will  work
+      include_role:
+        name: bootstrap
+
+- hosts: all
+  roles:
+    - common
+    - git
+    - dotfiles
+    - aliases
+    - nginx
+    - vim
+    - ycm
+    - fzf
+    - fish
+    - asdf
+    - nginx

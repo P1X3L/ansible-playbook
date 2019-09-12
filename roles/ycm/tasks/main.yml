@@ -1,0 +1,24 @@
+---
+- name: install YCM build-essential dependency
+  apt:
+    name: ['build-essential', 'cmake', 'python3-dev']
+    update_cache: yes
+    cache_valid_time: 3600
+  become: yes
+  tags:
+    - ycm
+    - ycm-install-dependencies
+
+- name: check that ycm engine has already been installed
+  stat:
+    path: ~/.vim/plugged/YouCompleteMe/already_installed
+  register: stat_result
+  tags:
+    - ycm
+
+- name: run YCM (vim completion plugin) installer
+  shell: python3 ~/.vim/plugged/YouCompleteMe/install.py && touch ~/.vim/plugged/YouCompleteMe/already_installed
+  when: stat_result.stat.exists == false
+  tags:
+    - ycm
+    - ycm-build-engine

@@ -1,0 +1,8 @@
+---
+- name: create symlinks for aliases
+  file:
+    src: ~/.dotfiles/aliases
+    dest: ~/.aliases
+    state: link
+  tags:
+    - aliases

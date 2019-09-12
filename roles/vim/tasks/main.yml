@@ -1,0 +1,19 @@
+---
+- name: install vim
+  apt:
+    name: 'vim'
+    update_cache: yes
+  become: yes
+  tags:
+    - vim
+    - vim-install
+
+- name: create symlinks for vimrc
+  file:
+    src: ~/.dotfiles/vimrc
+    dest: ~/.vimrc
+    state: link
+  tags:
+    - vim
+    - vim-install
+    - vim-symlink

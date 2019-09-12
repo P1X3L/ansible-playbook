@@ -1,0 +1,27 @@
+---
+- name: install git
+  apt:
+    name: 'git'
+    update_cache: yes
+  become: yes
+  tags:
+    - git
+    - git-install
+
+- name: create symlinks for gitconfig
+  file:
+    src: ~/.dotfiles/gitconfig
+    dest: ~/.gitconfig
+    state: link
+  tags:
+    - git
+    - git-symlink
+
+- name: create symlinks for gitconfig dependencies
+  file:
+    src: ~/.dotfiles/config/git
+    dest: ~/.config/git
+    state: link
+  tags:
+    - git
+    - git-symlink
